@@ -59,5 +59,28 @@ namespace WebApplication3.Controllers
             }
             return RedirectToAction("Index");
         }
+
+
+        public ActionResult Delete (int id )
+        {
+            Models.Employee e1 = EmpList.Where(e => e.ID == id).FirstOrDefault();
+
+
+            return View(e1);
+        
+        }
+        [HttpPost]
+        public ActionResult Delete(Models.Employee e)
+        {
+            int index = -1;
+            for (int i = 0; i < EmpList.Count; i++)
+            {
+                if (EmpList[i].ID == e.ID)
+                    index = i;
+            }
+
+            EmpList.RemoveAt(index);
+            return RedirectToAction("Index");
+        }
     }
 }
